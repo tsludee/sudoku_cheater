@@ -1,12 +1,26 @@
 from tkinter import *
-import sudoku_solver
+from sudoku_solver import *
 
 
 root = Tk()
 root.title('Sudoku Solver')
 
 def submit():
-    return
+    global puzzle
+    puzzle = [
+        [3, 9, -1,  -1, 5, -1,  -1, -1, -1],
+        [-1, -1, -1,    2, -1, -1,  -1, -1, 5],
+        [-1, -1, -1,    7, 1, 9,    -1, 8, -1],
+
+        [-1, 5, -1, -1, 6, 8,   -1, -1, -1],
+        [2, -1, 6,  -1, -1, 3,  -1, -1, -1],
+        [-1, -1, -1,    -1, -1, -1, -1, -1, 4],
+
+        [5, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+        [6, 7, -1,  1, -1, 5,   -1, 4, -1],
+        [1, -1, 9,  -1, -1, -1, 2, -1, -1]
+    ]
+    solve_sudoku(puzzle)
 
 # create puzzle entry
 # row 1
@@ -208,8 +222,11 @@ row9_col7.grid(row=9, column=7)
 row9_col8.grid(row=9, column=8)
 row9_col9.grid(row=9, column=9)
 
+# add instructions at the top
+instructions_label = Label(root, text="type in the what you know from the puzzle. type '-1' for blank spaces")
+instructions_label.grid(row=0, column=4, columnspan=3)
 # create a submit button
 submit_btn = Button(root, text="Solve the Puzzle", command=submit, background="green")
-submit_btn.grid(row=10, column=4, columnspan=3)
+submit_btn.grid(row=10, column=4, columnspan=3, sticky=W+E+N+S)
 
 root.mainloop()
